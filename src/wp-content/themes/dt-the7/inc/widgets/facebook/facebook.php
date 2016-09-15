@@ -114,27 +114,28 @@ class ZO_Facebook_Widget extends WP_Widget
         <p><label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php _e('Title', 'fajar'); ?>: <input
                     class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                     name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
-                    value="<?php echo esc_attr($title); ?>"/></label></p>
+                    value="<?php echo esc_attr($title); ?>"/></label>
+        </p>
         <p><label for="<?php echo esc_attr($this->get_field_id('app_id')); ?>"><?php _e('App ID', 'fajar'); ?>: <input
                     class="widefat" id="<?php echo esc_attr($this->get_field_id('app_id')); ?>"
                     name="<?php echo esc_attr($this->get_field_name('app_id')); ?>" type="text"
-                    value="<?php echo esc_attr($appId); ?>"/></label></p>
+                    value="<?php echo esc_attr($appId); ?>"/></label>
+        </p>
         <p><label for="<?php echo esc_attr($this->get_field_id('app_secret')); ?>"><?php _e('App Secret', 'fajar'); ?>:
                 <input class="widefat" id="<?php echo esc_attr($this->get_field_id('app_secret')); ?>"
                        name="<?php echo esc_attr($this->get_field_name('app_secret')); ?>" type="text"
-                       value="<?php echo esc_attr($appSecret); ?>"/></label></p>
-        <p><label for="<?php echo esc_attr($this->get_field_id('number')); ?>"><?php _e('Number of photos', 'fajar'); ?>
+                       value="<?php echo esc_attr($appSecret); ?>"/></label>
+        </p>
+        <p><label for="<?php echo esc_attr($this->get_field_id('number')); ?>"><?php _e('Number of posts', 'fajar'); ?>
                 : <input class="widefat" id="<?php echo esc_attr($this->get_field_id('number')); ?>"
                          name="<?php echo esc_attr($this->get_field_name('number')); ?>" type="text"
-                         value="<?php echo esc_attr($number); ?>"/></label></p>
+                         value="<?php echo esc_attr($number); ?>"/></label>
+        </p>
         <p><label for="<?php echo esc_attr($this->get_field_id('columns')); ?>"><?php _e('Columns', 'fajar'); ?>: <input
                     class="widefat" id="<?php echo esc_attr($this->get_field_id('columns')); ?>"
                     name="<?php echo esc_attr($this->get_field_name('columns')); ?>" type="text"
-                    value="<?php echo esc_attr($columns); ?>"/></label></p>
-        <p><label for="<?php echo esc_attr($this->get_field_id('link')); ?>"><?php _e('Link text', 'fajar'); ?>: <input
-                    class="widefat" id="<?php echo esc_attr($this->get_field_id('link')); ?>"
-                    name="<?php echo esc_attr($this->get_field_name('link')); ?>" type="text"
-                    value="<?php echo esc_url($link); ?>"/></label></p>
+                    value="<?php echo esc_attr($columns); ?>"/></label>
+        </p>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id('extra_class')); ?>">Extra Class:</label>
             <input class="widefat" type="text" id="<?php echo esc_attr($this->get_field_id('extra_class')); ?>"
@@ -160,13 +161,8 @@ class ZO_Facebook_Widget extends WP_Widget
             'default_graph_version' => GRAPH_VER
         );
         $facebook = new \Facebook\Facebook($config);
-        $params = [
-            'grant_type' => 'client_credentials',
-            'client_id' => $appId,
-            'client_secret' => $appSecret,
-        ];
         try {
-            $response = $facebook->get("/oauth/access_token?grant_type=client_credentials&client_id={$appId}&client_secret={$appSecret}", $params);
+            $response = $facebook->get("/oauth/access_token?grant_type=client_credentials&client_id={$appId}&client_secret={$appSecret}", $appId);
             $graphObject = $response->getGraphObject();
             $posts = $facebook->get("/" . PAGE_ID . "/posts?fields=permalink_url&limit=" . $limit, $graphObject->getField('access_token'));
         } catch (Facebook\Exceptions\FacebookResponseException $e) {
@@ -195,5 +191,3 @@ function register_facebook_widget() {
 }
 
 add_action('widgets_init', 'register_facebook_widget');
-?>
-

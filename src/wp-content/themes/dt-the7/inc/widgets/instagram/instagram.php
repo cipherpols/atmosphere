@@ -1,12 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define('BEFORE_WIDGET', '<aside id="%1$s" class="widget %2$s">');
-define('AFTER_WIDGET', '</aside>');
-
-define('BEFORE_TITLE', '<h3 class="wg-title"><span>');
-define('AFTER_TITLE', '</span></h3>');
-
 define('INSTAGRAM_ACCESS_TOKEN', '18817501.bacb24d.19a3b1654697440681d788fe42c494d1');
 define('INSTAGRAM', '18817501');
 
