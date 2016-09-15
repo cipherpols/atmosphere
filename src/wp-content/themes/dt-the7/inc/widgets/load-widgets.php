@@ -16,6 +16,8 @@ $presscore_widgets = array(
 	'inc/widgets/blog-posts/blog-posts.php',
 	'inc/widgets/blog-categories/blog-categories.php',
 	'inc/widgets/flickr/flickr.php',
+	'inc/widgets/instagram/instagram.php',
+	'inc/widgets/facebook/facebook.php',
 	'inc/widgets/progress-bars/progress-bars.php',
 	'inc/widgets/contact-form/contact-form.php',
 	'inc/widgets/accordion/accordion.php',
